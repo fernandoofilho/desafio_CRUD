@@ -64,3 +64,17 @@ página de cadastro
 Página do usuário padrão (sem acesso as funcionalidades de admin)
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f1414d6e-cf94-4e7d-97b2-5c43e587c394)
 
+
+A base de dados é composta pelas tabelas de User e User_history, todos os usuários criados serão armazenados em User, independente se forem apagados.
+
+Caso um usuário seja apagado, o atributo "userStatus" de userHistory será alterado para inactive, para fins de contagem posterior, além disso, será 
+armazenada a data de quando o usuário se tornou inativo.
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/ff238dfc-f127-4fb0-bb82-6939bd94dcf5)
+
+User
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/14f75ef7-922c-4d5b-9489-c6f8a4073519)
+
+User history
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/921fa6b8-de20-430d-b6e0-724f457ffaad)
+
+
