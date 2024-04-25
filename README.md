@@ -78,3 +78,7 @@ User history
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/921fa6b8-de20-430d-b6e0-724f457ffaad)
 
 
+As senhas são criptografadas e descriptografadas na API do backend, são armazenadas criptografadas no banco.
+
+Optei por não utilizar .env no back e no front por ser um projeto que não vai entrar em deploy de fato, então todas as rotas e secre_keys estão no código 
+
