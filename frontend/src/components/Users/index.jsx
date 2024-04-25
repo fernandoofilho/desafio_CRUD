@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
-export default function Users() {
+import { useLogin } from '../../context/LoginContext';
+
+export default function Users(adminEmail) {
     const [users, setUsers] = useState([]);
+    const { userEmail } = useLogin();
     const [newUser, setNewUser] = useState({
         userEmail: '',
         userName: '',
@@ -10,9 +13,23 @@ export default function Users() {
         userKey: '',
         userAccess: '1' 
     });
+    const token = localStorage.getItem('token');
 
     const addUser = () => {
-        axios.post('http://127.0.0.1:5000/create/selfCreate', newUser)
+        const formData = new FormData();
+        formData.append('requesterEmail', userEmail);
+        formData.append('userEmail', newUser.userEmail);
+        formData.append('userName', newUser.userName);
+        formData.append('userSurname', newUser.userSurname);
+        formData.append('userKey', newUser.userKey);
+        
+        const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          };
+
+        axios.post('http://127.0.0.1:5000/create/adminCreate', formData, config)
         .then(response => {
             console.log(response.data.message);
             listUsers();
@@ -25,10 +42,10 @@ export default function Users() {
 
     const listUsers = () => {
         axios.get('http://127.0.0.1:5000/search/')
+        
         .then(response => {
             const userDataString = response.data.users.replace(/'/g, '"'); 
 
-            console.log(userDataString);
 
             const userDataArray = JSON.parse(userDataString); 
             setUsers(userDataArray); 
@@ -61,6 +78,7 @@ export default function Users() {
     };
 
     useEffect(() => {
+
         listUsers();
     }, []);
 

@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../context/LoginContext';
-import { useEmail } from '../../context/EmailContext';
 import './index.css';
 
 export default function Login() {
     const navigate = useNavigate();
-    const { isLoggedIn, login } = useLogin();
-    const { setUserEmail } = useEmail();
+    const { login } = useLogin();
     const [mode, setMode] = useState('login');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [userEmail, setUserEmailState] = useState('');
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate('/admin');
-        }
-    }, [isLoggedIn, navigate]);
+    const [userEmail, setUserEmail] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -35,9 +27,23 @@ export default function Login() {
 
             if (response.ok) {
                 const data = await response.json();
-                localStorage.setItem('token', data.access_token);
-                login();
-                setUserEmail(userEmail);
+                const searchUser = await fetch('http://127.0.0.1:5000/search/user/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${data.access_token}`
+                    },
+                    body: formData,
+                });
+
+                if (searchUser.ok) {
+                    const userData = await searchUser.json();
+                    const { userEmail, userLevelAccess } = JSON.parse(userData.data.replace(/'/g, '"'));
+                    login(data.access_token, userEmail, userLevelAccess);
+                    redirectToNextPage(userLevelAccess);
+                } else {
+                    const data = await searchUser.json();
+                    setErrorMessage(data.message);
+                }
             } else {
                 const data = await response.json();
                 setErrorMessage(data.message);
@@ -47,13 +53,23 @@ export default function Login() {
         }
     };
 
+    const redirectToNextPage = (userLevelAccess) => {
+        if (userLevelAccess === 1) {
+            navigate('/home');
+        } else {
+            navigate('/admin');
+        }
+    };
+
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
             const formData = new FormData();
             formData.append('userEmail', userEmail);
-            formData.append('userName', name);
-            formData.append('userSurname', surname);
+            if (mode === 'signup') {
+                formData.append('userName', name);
+                formData.append('userSurname', surname);
+            }
             formData.append('userKey', password);
 
             const response = await fetch('http://127.0.0.1:5000/create/selfCreate', {
@@ -86,7 +102,7 @@ export default function Login() {
                         <input type="text" placeholder="Sobrenome" value={surname} onChange={(e) => setSurname(e.target.value)} />
                     </>
                 )}
-                <input type="email" placeholder="Email" value={userEmail} onChange={(e) => setUserEmailState(e.target.value)} />
+                <input type="email" placeholder="Email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
                 <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">{mode === 'login' ? 'Entrar' : 'Cadastrar'}</button>
             </form>

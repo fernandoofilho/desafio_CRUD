@@ -33,9 +33,9 @@ export default function Home() {
   };
 
   return (
-    <>
+    <>        
+      <SideBar onTabClick={handleTabClick} />
       <div className='.container-home'>
-        <SideBar onTabClick={handleTabClick} />
         <div className='content'>
           {activeTab === 'profile' && <Profile/>}
           {activeTab === 'home' && <Charts fetchWithToken={fetchWithToken} />}

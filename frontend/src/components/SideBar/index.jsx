@@ -14,7 +14,7 @@ export default function SideBar({ onTabClick }) {
   };
 
   return (
-    <div className='container'>
+    <div className='container-sidebar'>
         
       <div className='profile-container'>
         <button className= 'profile-button' onClick={() => onTabClick('profile')}> 
