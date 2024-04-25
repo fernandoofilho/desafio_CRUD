@@ -73,16 +73,17 @@ def search_user():
     return response, 404
     
 # update
-@app.route('/update/user/', methods=['PUT', 'PATCH'])
+@app.route('/update/user/', methods=['PATCH'])
 # @jwt_required()
-def update_entire_user():
-    if request.method == 'PUT':
-        userEmail, userName, userSurname, userKey, userAccess = extract_user_data_from_request(request) 
-        if None in (userEmail, userName, userSurname, userKey, userAccess):
-            response = add_headers(jsonify({'message': 'incomplete user data'}))
-            return response, 400 
-    if request.method == 'PATCH':
-        return 
+def update_user():
+    # if request.method == 'PUT':
+    #     userEmail, userName, userSurname, userKey, userAccess = extract_user_data_from_request(request) 
+    #     if None in (userEmail, userName, userSurname, userKey, userAccess):
+    #         response = add_headers(jsonify({'message': 'incomplete user data'}))
+    #         return response, 400 
+    
+    userEmail, userName, userSurname, userKey, userAccess = extract_user_data_from_request(request) 
+
     message, statuscode = update(userEmail = userEmail,
                                  userName= userName,
                                  userSurname= userSurname,
@@ -90,6 +91,7 @@ def update_entire_user():
                                  userAccess= userAccess)
     
     response = add_headers(jsonify({'message': f'{message}'}))
+    print(message)
     return response, statuscode 
 
 # delete
@@ -106,12 +108,13 @@ def delete_user():
 def login():
     userEmail = request.form.get('userEmail')
     password = request.form.get('userKey')
-    print(request.form)
-    if auth(userEmail, password):
+    isAuth, message = auth(userEmail, password)
+    if isAuth:
         access_token = create_access_token(identity=userEmail)
         return jsonify(access_token=access_token), 200
     else:
-        return jsonify({"message": "Invalid username or password"}), 401
+        return jsonify({"message": f"{message}"}), 401
+
 
 @app.route("/analytics/", methods=['GET'])
 # @jwt_required()
@@ -119,3 +122,14 @@ def analytics():
     response = analytics_data()
     response = add_headers(jsonify({'data': response}))
     return response, 200 
+
+@app.route("/verify/key", methods=['POST'])
+def verify_user_key():
+    userEmail = request.form.get('userEmail')
+    password = request.form.get('currentPassword')
+
+    response,code = verify_key(userEmail, password) # status code (401 ou 200)
+    response = jsonify({"message": f"{response}"})
+    response = add_headers(response)
+    
+    return response, code

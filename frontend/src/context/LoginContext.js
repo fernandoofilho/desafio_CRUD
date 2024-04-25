@@ -21,6 +21,7 @@ export const LoginProvider = ({ children }) => {
   const login = (token, email, levelAccess, name, surname) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userEmail', email);
+    localStorage.setItem('isLoggedIn', true);
     setIsLoggedIn(true);
     setUserEmail(email);
     setUserLevelAccess(levelAccess);
@@ -39,7 +40,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, userEmail,userName, userSurname, userLevelAccess, login, logout }}>
+    <LoginContext.Provider value={{ isLoggedIn, userEmail, userName, userSurname, userLevelAccess, login, logout, setIsLoggedIn }}>
       {children}
     </LoginContext.Provider>
   );

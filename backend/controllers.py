@@ -12,17 +12,18 @@ def extract_user_data_from_request(request):
     userAccess = request.form.get('userAccess')
     return userEmail, userName, userSurname, userKey, userAccess
 
-def encrypt_key(key, value):
-    key = key.encode()
-    cipher_suite = Fernet(key)
-    encrypted_value = cipher_suite.encrypt(value.encode())
-    return encrypted_value
+# def encrypt_key(key, value):
+#     key = key.encode()
+#     cipher_suite = Fernet(key)
+#     encrypted_value = cipher_suite.encrypt(value.encode())
+#     return encrypted_value
 
-def decrypt_key(key, encrypted_value):
-    key = key.encode()
-    cipher_suite = Fernet(key)
-    decrypted_value = cipher_suite.decrypt(encrypted_value).decode()
-    return decrypted_value
+# def decrypt_key(key, encrypted_value):
+#     key = key.encode()
+#     cipher_suite = Fernet(key)
+#     decrypted_value = cipher_suite.decrypt(encrypted_value).decode()
+#     return decrypted_value
+
 def is_valid_data(userEmail, userName, userSurname, userAccess, userKey):
     def is_valid_key():
         reg = r'^(?=.*[A-Z])(?=.*[!@#$%^&*()_+=\-{}[\]:;"\'|,.<>?]).{8,16}$'
@@ -74,7 +75,7 @@ def create(userEmail, userName, userSurname, userAccess, userKey, createdBy= 'se
         return f'Error: {[m for m in message]}', 403
     
     try: 
-        key = encrypt_key(key= 'pzGaqwa6nphXtMmCEJnZvBgM5hK8oaBUABhaKMP4MhY=', value = userKey).decode('utf-8')
+        key = userKey #encrypt_key(key= 'pzGaqwa6nphXtMmCEJnZvBgM5hK8oaBUABhaKMP4MhY=', value = userKey).decode('utf-8')
         user = Users(
                     userEmail=userEmail,
                     userName=userName,
@@ -97,18 +98,18 @@ def create(userEmail, userName, userSurname, userAccess, userKey, createdBy= 'se
         db.session.rollback()
         return f'Error {e} while creating user for this email: {userEmail}', 500
       
-def update(userEmail, userName= None, userSurname= None, userKey= None, userAccess= None, data:dict= None):
+def update(userEmail, userName= None, userSurname= None, userKey= None, userAccess= None):
     new_data ={
               'userName':userName,
               'userSurname':userSurname,
               'userKey':userKey,
               'userLevelAccess':userAccess
               }
-    # update all
     user = Users.query.get(userEmail)
     for column, value in zip(new_data.keys(), new_data.values()):
-        setattr(user, column, value)
-        db.session.commit()
+        if value is not None:
+            setattr(user, column, value)
+            db.session.commit()
     return f'user {userEmail} Updated', 200
 
 def delete(userEmail):
@@ -142,12 +143,22 @@ def analytics_data():
 def auth(userEmail, password):
     user, history = search(userEmail)
     if None in (user, history):
-        return False
-    key = decrypt_key(key='pzGaqwa6nphXtMmCEJnZvBgM5hK8oaBUABhaKMP4MhY=', encrypted_value=user.userKey)  
+        return False, "User not found"
+    #key = decrypt_key(key='pzGaqwa6nphXtMmCEJnZvBgM5hK8oaBUABhaKMP4MhY=', encrypted_value=user.userKey)  
+    if not user.userKey == password:
+        print("Wrong psswd")
 
-    if not key == password:
-        return False
+        return False, "Wrong password"
     if history.userStatus != 'active':
-        return False
+        print("Inactive user")
+        return False, "Inactive user"
     
-    return True
+    return True, "success"
+
+def verify_key(userEmail, userKey):
+    user, _ = search(userEmail)
+    print(user.userKey, userKey)
+    print(user.userKey == userKey)
+    if user is None or user.userKey != userKey:
+        return "Not allowed", 401
+    return "allowed", 200

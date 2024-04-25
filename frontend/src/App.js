@@ -1,31 +1,45 @@
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+// App.js
+import React, {useEffect} from 'react';
+import { Routes, Route, Navigate  } from 'react-router-dom';
 import HomeAdmin from './pages/HomeAdmin';
 import HomeUser from './pages/HomeUser';
 import Login from './pages/Login';
 import { useLogin } from './context/LoginContext';
 
 function App() {
-  const { isLoggedIn, userLevelAccess } = useLogin();
-  
-  const redirectToCorrectPage = () => {
-    if (isLoggedIn) {
-      if (userLevelAccess === 1) { 
-        return <Navigate to="/admin" />;
-      } else { 
-        return <Navigate to="/home" />;
-      }
-    } else { 
+  const { isLoggedIn, setIsLoggedIn, userLevelAccess } = useLogin();
+
+  const renderProtectedRoute = (element, requiredLevelAccess) => {
+    if (!isLoggedIn || (requiredLevelAccess && userLevelAccess !== requiredLevelAccess)) {
+
       return <Navigate to="/login" />;
     }
+    return element;
   };
-
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+    if (storedIsLoggedIn) {
+      setIsLoggedIn(true);
+    }
+  }, []);
   return (
     <Routes>
-      <Route path="/" element={redirectToCorrectPage()} />
-      <Route path="/home" element={<HomeUser />} />
-      <Route path="/admin" element={<HomeAdmin />} />
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/home"
+        element={renderProtectedRoute(<HomeUser />, 1)}
+      />
+      <Route
+        path="/admin"
+        element={renderProtectedRoute(<HomeAdmin />, 2)}
+      />
+      <Route
+        path="/"
+        element={<Login />}
+      />
+      <Route
+        path="/login"
+        element={<Login />} />
+
     </Routes>
   );
 }

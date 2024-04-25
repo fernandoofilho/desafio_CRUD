@@ -8,6 +8,7 @@ GRÁFICOS:
         [X] Cancelados, separado por tipo de usuário 
 
     Extra: 
+        [ ] Background bonitinho para o user, ja que ele nao pode fazer nada  
         [ ] ainda não sei 
 
 
@@ -19,19 +20,28 @@ ENTREGÁVEIS:
             [X] Search all users
             [X] Search single user  
             [-] Update usuário
-                [X] PUT
-                [ ] PATCH
+                [-] --PUT--
+                [X] PATCH
             [X] Delete usuário 
             [X] Read users info
-        [ ] Aplicação web com sistema de login e painel de crud de usuários e gráficos 
+        [X] Aplicação web com sistema de login e painel de crud de usuários e gráficos 
             [X] API - login via backend 
             [X] API - salvar login via jwt para manter sessão 
             [X] frontend - botões: logar, registrar
+        [ ] integração back e frontend
+            [ ] API - Admin deve poder alterar o tipo de outros usuarios e de admins mais novos
+            [ ] API - usuario só pode alterar nome, sobrenome e senha
+            [ ] Front - Campo de confirmar senha 
+            [ ] Carregar uma pagina de perfil para o admin 
+            [ ] Ver mais dados na pagina do admin 
+            [ ] css pagina admin 
+            [ ] Deixar a pagina de usuario mais bonita 
+
         [ ] Instruções para execução do backend e frontend da aplicação
-        [ ] Repositório git aberto 
+        [X] Repositório git aberto 
         [ ] Documentação detalhada 
     Desejável:
-        [ ] Containerização com docker 
+        [X] Containerização com docker 
         [X] Sistema de migration e seed no backend para criação de tabelas e usuario admin do sistema
         [ ] Utilizar ORM para obter acesso a base de dados de forma mais transparente
         [X] Criar gráficos utilizando d3 charts
@@ -50,7 +60,7 @@ PREMISSA:
 
 DEV: 
     backend:
-        [] API: 
+        [X] API: 
             [x] primeira rota
             [X] conexão com o banco 
             [X] criação de tabelas através de migrations 
@@ -59,5 +69,5 @@ DEV:
             [X] Criação das rotas de Read 
             [X] Criação das rotas de Delete 
             [X] Criação da rota de login 
-            [ ] Criação dos arquivos docker  
+            [X] Criação dos arquivos docker  
             
