@@ -46,3 +46,21 @@ npm run start
 Após executar o frontend e o backend, você poderá acessar o aplicativo em um navegador da web. Certifique-se de que o servidor backend esteja em execução antes de iniciar o frontend.
 
 Este projeto foi desenvolvido como parte de um desafio e não será mais mantido ou atualizado. Portanto, não são aceitas contribuições neste momento.
+
+
+Gráficos de usuários ativos e inativos separados por tipo 
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/06e4c5fd-16aa-4591-92de-41d12476ee90)
+
+página de adicionar ou remover usuários 
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/98ea74a0-ddc4-4157-8dab-aa6f0a8a0083)
+
+página de login
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/12ebf3c2-875f-4026-bfea-51d84c3a7ce9)
+
+
+página de cadastro
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/2178b149-9ed3-4b99-928c-c3bfc1e9ae55)
+
+Página do usuário padrão (sem acesso as funcionalidades de admin)
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f1414d6e-cf94-4e7d-97b2-5c43e587c394)
+
