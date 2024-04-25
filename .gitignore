@@ -152,16 +152,4 @@ cython_debug/
 #.idea/
 backend/proj_indt/
 frontend/node_modules/
-frontend/build/
-frontend/dist/
-frontend/*.css.map
-frontend/*.js.map
-frontend/.env*
-frontend/package-lock.json
-frontend/yarn.lock
-frontend/*.swp
-frontend/.DS_Store
-frontend/npm-debug.log*
-frontend/.cache/
-frontend/coverage/
-frontend/*.tsbuildinfo
+
