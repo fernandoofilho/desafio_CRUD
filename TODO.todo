@@ -1,0 +1,63 @@
+Sistema de Gerenciamento de usuários - prazo 25/04
+INDT @ 2024
+
+GRÁFICOS:
+
+    necessário: 
+        [X] quantitativo de usuários ativos
+        [X] Cancelados, separado por tipo de usuário 
+
+    Extra: 
+        [ ] ainda não sei 
+
+
+ENTREGÁVEIS:
+    necessário: 
+        [ ] API Rest para criação de CRUD de usuários:
+            [X] Create usuários self Create
+            [X] Create usuário by admin 
+            [X] Search all users
+            [X] Search single user  
+            [-] Update usuário
+                [X] PUT
+                [ ] PATCH
+            [X] Delete usuário 
+            [X] Read users info
+        [ ] Aplicação web com sistema de login e painel de crud de usuários e gráficos 
+            [X] API - login via backend 
+            [X] API - salvar login via jwt para manter sessão 
+            [X] frontend - botões: logar, registrar
+        [ ] Instruções para execução do backend e frontend da aplicação
+        [ ] Repositório git aberto 
+        [ ] Documentação detalhada 
+    Desejável:
+        [ ] Containerização com docker 
+        [X] Sistema de migration e seed no backend para criação de tabelas e usuario admin do sistema
+        [ ] Utilizar ORM para obter acesso a base de dados de forma mais transparente
+        [X] Criar gráficos utilizando d3 charts
+
+PREMISSA:
+    necessário:
+        [X] utilizar um sistema gerenciador de banco de dados relacional (Postgresql)
+        [X] dois tipos de usuários, Admin e Comum
+        [X] Dados de usuário:
+            [x] Nome
+            [x] Sobrenome
+            [x] e-mail
+            [x] senha
+            [x] nível de acesso 
+
+
+DEV: 
+    backend:
+        [] API: 
+            [x] primeira rota
+            [X] conexão com o banco 
+            [X] criação de tabelas através de migrations 
+            [X] Criação das rotas de Create
+             [X] Criaçaõ das rotas de Update
+            [X] Criação das rotas de Read 
+            [X] Criação das rotas de Delete 
+            [X] Criação da rota de login 
+            [ ] Criação dos arquivos docker  
+            

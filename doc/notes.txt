@@ -1,0 +1,29 @@
+###############################################################################
+Tecnologias: 
+
+(dentre as tecnologias disponíveis para o desafio, optei pelas mais semelhantes 
+com as que foram descritas como requisitos para o projeto)
+
+Backend: flask + SQLAlchemy   
+frontend: reactjs 18.2
+node version: 20.11
+python version: 3.10
+
+Containerização utilizando docker
+
+################################################################################
+Backend 
+
+
+1. Optei por fazer o backend em uma arquitetura monolítica, pela simplicidade 
+do desenvolvimento e implementação.
+2. Vou separar os níveis de acesso em 1, 2 e 3. Onde: 
+    1. Usuário comum, sem acesso a dashboard.
+    2. Usuários com acesso a dashboard mas sem acesso a criação de novos Usuários.
+    3. Usuário com todas as permissões.
+
+
+docker run --name project_database -e POSTGRES_PASSWORD=INDT@2024 -d postgres
+
+
+# não encriptei o email por pensar na busca, teriamos que encriptar novamente e buscar na base 
