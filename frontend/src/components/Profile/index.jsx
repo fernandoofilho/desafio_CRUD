@@ -1,9 +1,12 @@
-import React, { useState  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import './index.css';
 import { useLogin } from '../../context/LoginContext';
 
 export default function Profile() {
-    const { userEmail, userName, userSurname, logout, } = useLogin();
+    const { userEmail, userName,  userSurname,
+            logout,
+            setUserSurname:SetCurrentSurname,
+            setUserName:SetCurrentName } = useLogin();
     const [name, setName] = useState(userName);
     const [surname, setSurname] = useState(userSurname);
     const [password, setPassword] = useState('');
@@ -14,22 +17,46 @@ export default function Profile() {
     const handleEdit = () => {
         setIsEditing(true);
     };
-
+    useEffect(() => {
+        SetCurrentName(name);
+        SetCurrentSurname(surname);
+    }, [surname, SetCurrentSurname, name, SetCurrentName]);
     const handleSave = async () => {
         try {
             const formData = new FormData();
             formData.append('userEmail', userEmail);
             formData.append('userName', name);
             formData.append('userSurname', surname);
-            formData.append('userKey', password);
             formData.append('currentPassword', currentPassword);
     
-            const verifyResponse = await fetch('http://127.0.0.1:5000/verify/key', {
-                method: 'POST',
-                body: formData,
-            });
+            // Verifique se o campo de senha está preenchido antes de realizar a verificação
+            if (password.trim() !== '') {
+                const verifyResponse = await fetch('http://127.0.0.1:5000/verify/key', {
+                    method: 'POST',
+                    body: formData,
+                });
     
-            if (verifyResponse.ok) {
+                if (verifyResponse.ok) {
+                    const updateResponse = await fetch('http://127.0.0.1:5000/update/user/', {
+                        method: 'PATCH',
+                        body: formData,
+                    });
+    
+                    if (updateResponse.ok) {
+                        setIsEditing(false);
+                        setName(name);
+                        setSurname(surname);
+                    } else {
+                        const data = await updateResponse.json();
+                        setErrorMessage(data.message);
+                    }
+                } else if (verifyResponse.status === 401) {
+                    setErrorMessage('A senha atual fornecida não coincide com a senha armazenada.');
+                } else {
+                    setErrorMessage('Ocorreu um erro ao verificar a senha atual.');
+                }
+            } else {
+                // Se o campo de senha não estiver preenchido, não faça a verificação
                 const updateResponse = await fetch('http://127.0.0.1:5000/update/user/', {
                     method: 'PATCH',
                     body: formData,
@@ -43,15 +70,12 @@ export default function Profile() {
                     const data = await updateResponse.json();
                     setErrorMessage(data.message);
                 }
-            } else if (verifyResponse.status === 401) {
-                setErrorMessage('A senha atual fornecida não coincide com a senha armazenada.');
-            } else {
-                setErrorMessage('Ocorreu um erro ao verificar a senha atual.');
             }
         } catch (error) {
             console.error('Erro:', error);
         }
     };
+    
     
     
 
