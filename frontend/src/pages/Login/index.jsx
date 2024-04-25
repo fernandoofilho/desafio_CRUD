@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../context/LoginContext';
-import { useEmail } from '../../context/EmailContext'; // Importe o hook useEmail
+import { useEmail } from '../../context/EmailContext'; 
 import './index.css';
 
 export default function Login() {
     const navigate = useNavigate();
     const { isLoggedIn, login } = useLogin();
-    const { setUserEmail } = useEmail(); // Use o hook useEmail
+    const { setUserEmail } = useEmail(); 
     const [mode, setMode] = useState('login');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
