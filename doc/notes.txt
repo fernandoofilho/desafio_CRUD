@@ -18,12 +18,9 @@ Backend
 1. Optei por fazer o backend em uma arquitetura monolítica, pela simplicidade 
 do desenvolvimento e implementação.
 2. Vou separar os níveis de acesso em 1, 2 e 3. Onde: 
-    1. Usuário comum, sem acesso a dashboard.
-    2. Usuários com acesso a dashboard mas sem acesso a criação de novos Usuários.
-    3. Usuário com todas as permissões.
+    1. Usuário comum, sem acesso a nada além de mudar os próprios atributos.
+    2. Usuários admin 
+
 
 
 docker run --name project_database -e POSTGRES_PASSWORD=INDT@2024 -d postgres
-
-
-# não encriptei o email por pensar na busca, teriamos que encriptar novamente e buscar na base 
