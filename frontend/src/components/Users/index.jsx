@@ -3,7 +3,7 @@ import axios from 'axios';
 import './index.css';
 import { useLogin } from '../../context/LoginContext';
 
-export default function Users(adminEmail) {
+export default function Users() {
     const [users, setUsers] = useState([]);
     const { userEmail } = useLogin();
     const [newUser, setNewUser] = useState({
@@ -56,15 +56,25 @@ export default function Users(adminEmail) {
     };
     
 
-    const removeUser = (userEmail) => {
-        axios.delete(`http://127.0.0.1:5000/delete/user/?userEmail=${userEmail}`)
-        .then(response => {
+    const removeUser = async (userEmail, token) => {
+        try {
+            const formData = new FormData();
+            formData.append('userEmail', userEmail);
+    
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+    
+            const response = await axios.delete('http://127.0.0.1:5000/delete/user/', {
+                data: formData,
+                headers: headers,
+            });
+    
             console.log(response.data.message);
             listUsers();
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Erro ao remover usuário:', error);
-        });
+        }
     };
 
     const clearFields = () => {
@@ -98,13 +108,16 @@ export default function Users(adminEmail) {
                 <button type="button" onClick={clearFields}>Limpar Campos</button>
             </form>
 
+            <h2>Users</h2>
             <ul className='user-list'>
-                {users.slice(0, 8).map(user => (
-                    <li key={user.userEmail} className='user-item'>
-                        <span className='user-name'>{user.userName} {user.userSurname}</span>
-                        <span className='user-email'>{user.userEmail}</span>
-                        <button className='remove-button' onClick={() => removeUser(user.userEmail)}>Remover</button>
-                    </li>
+                {users.map(user => (
+                    user.userEmail !== userEmail && (
+                        <li key={user.userEmail} className='user-item'>
+                            <span className='user-name'>{user.userName} {user.userSurname}</span>
+                            <span className='user-email'>{user.userEmail}</span>
+                            <button className='remove-button' onClick={() => removeUser(user.userEmail)}>Remover</button>
+                        </li>    
+                )
                 ))}
             </ul>
 
