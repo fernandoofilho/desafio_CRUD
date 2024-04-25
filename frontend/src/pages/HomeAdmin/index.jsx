@@ -1,34 +1,45 @@
-// Home.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
-import './index.css'; 
 import Users from '../../components/Users';
 import Charts from '../../components/Charts';
 import Profile from '../../components/Profile';
+import './index.css'; 
 
-export default function Home({ isLoggedIn }) {
+export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const navigate = useNavigate();
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    const storedToken = localStorage.getItem('token');
+    if (!storedToken) {
       navigate('/login');
+    } else {
+      setToken(storedToken);
     }
-  }, [isLoggedIn, navigate]);
+  }, [navigate]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  const fetchWithToken = async (url, options) => {
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    const response = await fetch(url, { ...options, headers });
+    return response;
+  };
+
   return (
     <>
-      <div className='container'>
-        <SideBar className='sideBar' onTabClick={handleTabClick} />
+      <div className='.container-home'>
+        <SideBar onTabClick={handleTabClick} />
         <div className='content'>
           {activeTab === 'profile' && <Profile/>}
-          {activeTab === 'home' && <Charts/>}
-          {activeTab === 'users' && <Users/>}
+          {activeTab === 'home' && <Charts fetchWithToken={fetchWithToken} />}
+          {activeTab === 'users' && <Users fetchWithToken={fetchWithToken} />}
         </div>
       </div>
     </>

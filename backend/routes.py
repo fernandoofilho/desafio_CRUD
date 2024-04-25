@@ -49,7 +49,7 @@ def create_by_admin():
 
 # Read 
 @app.route('/search/', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def get_users():
     users, history = query_all_users()
     
@@ -62,7 +62,7 @@ def get_users():
     return response, 200
 
 @app.route('/search/user/', methods=['GET', 'POST'])
-@jwt_required()
+# @jwt_required()
 def search_user():
     userEmail, _, _, _, _ = extract_user_data_from_request(request) 
     user, history = search(userEmail)
@@ -74,7 +74,7 @@ def search_user():
     
 # update
 @app.route('/update/user/', methods=['PUT', 'PATCH'])
-@jwt_required()
+# @jwt_required()
 def update_entire_user():
     if request.method == 'PUT':
         userEmail, userName, userSurname, userKey, userAccess = extract_user_data_from_request(request) 
@@ -94,7 +94,7 @@ def update_entire_user():
 
 # delete
 @app.route('/delete/user/', methods=['DELETE'])
-@jwt_required()
+# @jwt_required()
 def delete_user():
     userEmail, _, _, _, _ = extract_user_data_from_request(request) 
     message, statuscode = delete(userEmail = userEmail)
@@ -120,7 +120,7 @@ def seed():
     return jsonify({'message': f'Success'}), 200 
 
 @app.route("/analytics/", methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def analytics():
     response = analytics_data()
     response = add_headers(jsonify({'data': response}))

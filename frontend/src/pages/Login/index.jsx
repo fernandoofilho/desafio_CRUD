@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLogin } from '../../context/LoginContext';
+import { useEmail } from '../../context/EmailContext'; // Importe o hook useEmail
 import './index.css';
 
-export default function Login({ isLoggedIn, setIsLoggedIn, setUserEmail }) {
+export default function Login() {
     const navigate = useNavigate();
+    const { isLoggedIn, login } = useLogin();
+    const { setUserEmail } = useEmail(); // Use o hook useEmail
     const [mode, setMode] = useState('login');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [userEmail, setUserEmailState] = useState('');
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/home');
+            navigate('/admin');
         }
     }, [isLoggedIn, navigate]);
 
@@ -21,7 +25,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, setUserEmail }) {
         e.preventDefault();
         try {
             const formData = new FormData();
-            formData.append('userEmail', email);
+            formData.append('userEmail', userEmail);
             formData.append('userKey', password);
     
             const response = await fetch('http://127.0.0.1:5000/login', {
@@ -32,8 +36,8 @@ export default function Login({ isLoggedIn, setIsLoggedIn, setUserEmail }) {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.access_token); 
-                setIsLoggedIn(true);
-                setUserEmail(email);
+                login();
+                setUserEmail(userEmail); 
             } else {
                 const data = await response.json();
                 setErrorMessage(data.message);
@@ -62,7 +66,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, setUserEmail }) {
                         <input type="text" placeholder="Sobrenome" value={surname} onChange={(e) => setSurname(e.target.value)} />
                     </>
                 )}
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" placeholder="Email" value={userEmail} onChange={(e) => setUserEmailState(e.target.value)} />
                 <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">{mode === 'login' ? 'Entrar' : 'Cadastrar'}</button>
             </form>

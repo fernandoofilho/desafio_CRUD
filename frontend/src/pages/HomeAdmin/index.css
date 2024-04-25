@@ -1,15 +1,14 @@
-.container {
+.container-home {
     display: flex;
     flex-wrap: wrap;
   }
   
   .sideBar {
-    width: 200px; /* Largura da barra lateral */
-    /* Estilos adicionais da barra lateral */
+    width: 200px;
   }
   
   .content {
-    flex: 1; /* O conteúdo ocupa todo o espaço restante */
-    /* Estilos adicionais do conteúdo */
+    flex: 1; 
+    margin-left: 130px;
   }
   

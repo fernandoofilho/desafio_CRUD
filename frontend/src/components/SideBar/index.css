@@ -2,11 +2,12 @@
     display: flex;
     background-color: #212529;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     width: 70px;
     align-items: center;
     margin-right: 30px;
     padding: 1px;
+    position:absolute;
   }
   
   
