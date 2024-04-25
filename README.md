@@ -49,7 +49,7 @@ Este projeto foi desenvolvido como parte de um desafio e não será mais mantido
 
 
 Gráficos de usuários ativos e inativos separados por tipo 
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/06e4c5fd-16aa-4591-92de-41d12476ee90)
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/c41c27e2-6aee-4af4-87d2-46a02f2a6419)
 
 página de adicionar ou remover usuários 
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/98ea74a0-ddc4-4157-8dab-aa6f0a8a0083)
