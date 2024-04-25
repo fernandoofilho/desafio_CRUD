@@ -115,9 +115,12 @@ export default function Charts() {
   return (
     <>
     <div className='graficos'>
+     <h1> Gráfico - Admin</h1>
     <svg ref={svgRefAdmin} className='admin'/>
+    <h1> Gráfico - Usuário padrão </h1>
     <svg ref={svgRefNormal} className='normal'/>
     </div>
    </>
   );
 }
+ 
