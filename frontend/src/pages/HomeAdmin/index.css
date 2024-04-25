@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .sideBar {
+    width: 200px; /* Largura da barra lateral */
+    /* Estilos adicionais da barra lateral */
+  }
+  
+  .content {
+    flex: 1; /* O conteúdo ocupa todo o espaço restante */
+    /* Estilos adicionais do conteúdo */
+  }
+  

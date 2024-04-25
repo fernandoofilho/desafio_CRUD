@@ -1,0 +1,43 @@
+/* index.css */
+.user-home-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-home-container h2 {
+    margin-bottom: 20px;
+}
+
+.user-home-container div {
+    margin-bottom: 15px;
+}
+
+.user-home-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user-home-container input[type="text"],
+.user-home-container input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.user-home-container button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-home-container button:hover {
+    background-color: #0056b3;
+}
