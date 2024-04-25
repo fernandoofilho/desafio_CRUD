@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: database
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/database/seed_data.sql:/docker-entrypoint-initdb.d/seed_data.sql
+    environment:
+      POSTGRES_PASSWORD: INDT@2024
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    restart: always
+    volumes:
+      - ./backend:/app  
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: INDT@2024

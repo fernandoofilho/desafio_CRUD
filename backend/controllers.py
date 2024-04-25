@@ -1,5 +1,5 @@
 from app import db
-from models import User, UserHistory
+from models import Users, UserHistory
 from cryptography.fernet import Fernet
 import re
 from datetime import datetime
@@ -31,7 +31,7 @@ def is_valid_data(userEmail, userName, userSurname, userAccess, userKey):
         reg = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         return 'Invalid email address' if not re.match(reg, userEmail) else None
     def user_exists():
-        existing_user = User.query.filter_by(userEmail=userEmail).first()
+        existing_user = Users.query.filter_by(userEmail=userEmail).first()
         return 'User already exists' if existing_user is not None else None 
     def is_name_valid():
         return 'Invalid user name' if len(userName) == 0 else None 
@@ -57,12 +57,12 @@ def is_admin(userEmail):
     return True
 
 def query_all_users():
-    users = User.query.all()
+    users = Users.query.all()
     usersHistory = UserHistory.query.all()
     return users, usersHistory
 
 def search(userEmail):
-    user = User.query.filter_by(userEmail=userEmail).first()
+    user = Users.query.filter_by(userEmail=userEmail).first()
     user_history = UserHistory.query.filter_by(userEmail=userEmail).first()
     return (user, user_history) if user else (None, None)
 
@@ -75,7 +75,7 @@ def create(userEmail, userName, userSurname, userAccess, userKey, createdBy= 'se
     
     try: 
         key = encrypt_key(key= 'pzGaqwa6nphXtMmCEJnZvBgM5hK8oaBUABhaKMP4MhY=', value = userKey).decode('utf-8')
-        user = User(
+        user = Users(
                     userEmail=userEmail,
                     userName=userName,
                     userSurname=userSurname,
@@ -105,14 +105,14 @@ def update(userEmail, userName= None, userSurname= None, userKey= None, userAcce
               'userLevelAccess':userAccess
               }
     # update all
-    user = User.query.get(userEmail)
+    user = Users.query.get(userEmail)
     for column, value in zip(new_data.keys(), new_data.values()):
         setattr(user, column, value)
         db.session.commit()
     return f'user {userEmail} Updated', 200
 
 def delete(userEmail):
-    user = User.query.get(userEmail)
+    user = Users.query.get(userEmail)
     history = UserHistory.query.get(userEmail)
     if user:
         setattr(user, 'userLevelAccess', 0)
@@ -124,60 +124,6 @@ def delete(userEmail):
         return f'Registro deletado com sucesso: {user.userEmail}', 200
     
     return f'Not Found: {user.userEmail}', 404
-
-
-def seedData():
-    user_count = User.query.count()
-    if user_count == 0:
-        user_history_data = [
-                    ('user1@example.com', 'active', '2', 'self', '2023-01-01', None),
-                    ('user2@example.com', 'active', '1', 'self', '2023-01-02', None),
-                    ('user3@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user4@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user5@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user6@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user7@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user8@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user9@example.com', 'active', '1', 'self', '2023-01-20', None),
-                    ('user10@example.com', 'active', '1', 'self', '2023-01-20', None)
-                ]
-
-        user_data = [
-            ('admin@example.com', 'admin', 'usr', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 2),
-            ('user2@example.com', 'User2', 'Surname2', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user3@example.com', 'User3', 'Surname3', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user4@example.com', 'User4', 'Surname4', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user5@example.com', 'User5', 'Surname5', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user6@example.com', 'User6', 'Surname6', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user7@example.com', 'User7', 'Surname7', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user8@example.com', 'User8', 'Surname8', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user9@example.com', 'User9', 'Surname9', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1),
-            ('user10@example.com', 'User10', 'Surname10', 'gAAAAABmKDnCxwPm7_6PpOFxle4uaDODq_Fhbr8g_AXYex06F0f8cu5gMKpTp133qjVP0eCX4ETpQ7FlDEO7angIb6hKDpDE9Q==', 1)
-        ]
-
-        for user_history_item in user_history_data:
-            user_history = UserHistory(
-                userEmail=user_history_item[0],
-                userStatus=user_history_item[1],
-                userLevelAccess=user_history_item[2],
-                userCreatedBy=user_history_item[3],
-                creationDate=user_history_item[4],
-                deleteDate=user_history_item[5]
-            )
-            db.session.add(user_history)
-
-        for user_item in user_data:
-            user = User(
-                userEmail=user_item[0],
-                userName=user_item[1],
-                userSurname=user_item[2],
-                userKey=user_item[3],
-                userLevelAccess=user_item[4]
-            )
-            db.session.add(user)
-
-        db.session.commit()
-    return None
 
 def analytics_data():
     usersHistory = UserHistory.query.all()

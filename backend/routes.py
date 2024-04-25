@@ -113,12 +113,6 @@ def login():
     else:
         return jsonify({"message": "Invalid username or password"}), 401
 
-# seed data
-@app.route("/seed/", methods=['POST'])
-def seed():
-    seedData()
-    return jsonify({'message': f'Success'}), 200 
-
 @app.route("/analytics/", methods=['GET'])
 # @jwt_required()
 def analytics():

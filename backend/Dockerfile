@@ -2,23 +2,18 @@ FROM python:3.10
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt /app
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
-
-# Copie apenas os arquivos essenciais
-COPY database database
-COPY config.py .
-COPY routes.py .
-COPY app.py .
-COPY models.py .
-COPY controllers.py .
-
-# Execute os comandos para inicializar e migrar o banco de dados
-RUN flask db init
-RUN flask db migrate -m "Initial migration"
-RUN flask db upgrade
+COPY . /app
+RUN rm -rf migrations/ proj_indt/
 
 EXPOSE 5000
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD python ./app.py
+# RUN flask db init 
+# RUN flask db migrate 
+
+# EXPOSE 5000
+
+# CMD ["python3", "app.py"]

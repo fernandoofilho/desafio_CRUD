@@ -24,7 +24,7 @@ class UserHistory(db.Model):
     def is_active(self):
         return  self.userStatus == 'active'     
                                                            
-class User(db.Model):
+class Users(db.Model):
     userEmail = db.Column(db.String(100), primary_key=True)
     userName = db.Column(db.String(50), nullable=False)
     userSurname = db.Column(db.String(100), nullable=False)
