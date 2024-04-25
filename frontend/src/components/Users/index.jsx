@@ -22,7 +22,8 @@ export default function Users() {
         formData.append('userName', newUser.userName);
         formData.append('userSurname', newUser.userSurname);
         formData.append('userKey', newUser.userKey);
-        
+        formData.append('userAccess', newUser.userAccess);
+        console.log(newUser.userAccess)
         const config = {
             headers: {
               'Authorization': `Bearer ${token}`

@@ -69,6 +69,7 @@ def search(userEmail):
 
 def create(userEmail, userName, userSurname, userAccess, userKey, createdBy= 'self'):
     # optei por utilizar _ para o garbage collector liberar esse obj da memória asap
+
     _ = is_valid_data(userEmail, userName, userSurname, userAccess, userKey)
     valid, message = _['status'], _['message']
     if not valid:

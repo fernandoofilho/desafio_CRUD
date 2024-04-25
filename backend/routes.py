@@ -37,6 +37,7 @@ def create_user():
 def create_by_admin():
     requesterEmail = request.form.get('requesterEmail')
     isAdmin = is_admin(requesterEmail)
+
     if not isAdmin:
         response = add_headers(jsonify({'message':'user not allowed to this operation'}))
         return response, 403
