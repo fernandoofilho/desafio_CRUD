@@ -6,6 +6,8 @@ export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userLevelAccess, setUserLevelAccess] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userSurname, setUserSurname] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -16,12 +18,14 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (token, email, levelAccess) => {
+  const login = (token, email, levelAccess, name, surname) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userEmail', email);
     setIsLoggedIn(true);
     setUserEmail(email);
     setUserLevelAccess(levelAccess);
+    setUserName(name);
+    setUserSurname(surname);
   };
 
   const logout = () => {
@@ -30,10 +34,12 @@ export const LoginProvider = ({ children }) => {
     setIsLoggedIn(false);
     setUserEmail('');
     setUserLevelAccess('');
+    setUserName('');
+    setUserSurname('');
   };
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, userEmail, userLevelAccess, login, logout }}>
+    <LoginContext.Provider value={{ isLoggedIn, userEmail,userName, userSurname, userLevelAccess, login, logout }}>
       {children}
     </LoginContext.Provider>
   );

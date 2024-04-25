@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './index.css';
+import { useLogin } from '../../context/LoginContext';
 
 export default function NormalUserHome() {
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
+    const { userName, userSurname } = useLogin();
+
+    const [name, setName] = useState(userName);
+    const [surname, setSurname] = useState(userSurname);
+    console.log(name, surname)
     const [password, setPassword] = useState('');
     const [isEditing, setIsEditing] = useState(false);
 
@@ -26,7 +30,7 @@ export default function NormalUserHome() {
                 {isEditing ? (
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 ) : (
-                    <span>{name}</span>
+                    <span>{userName}</span>
                 )}
             </div>
             <div>
@@ -34,7 +38,7 @@ export default function NormalUserHome() {
                 {isEditing ? (
                     <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
                 ) : (
-                    <span>{surname}</span>
+                    <span>{userSurname}</span>
                 )}
             </div>
             <div>

@@ -37,8 +37,8 @@ export default function Login() {
 
                 if (searchUser.ok) {
                     const userData = await searchUser.json();
-                    const { userEmail, userLevelAccess } = JSON.parse(userData.data.replace(/'/g, '"'));
-                    login(data.access_token, userEmail, userLevelAccess);
+                    const { userEmail, userLevelAccess, userName, userSurname } = JSON.parse(userData.data.replace(/'/g, '"'));
+                    login(data.access_token, userEmail, userLevelAccess, userName, userSurname);
                     redirectToNextPage(userLevelAccess);
                 } else {
                     const data = await searchUser.json();
