@@ -151,34 +151,17 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 backend/proj_indt/
-# Node modules
-node_modules/
-
-# Build files
-build/
-dist/
-*.css.map
-*.js.map
-
-# Environment variables
-.env*
-
-# Dependencies
-package-lock.json
-yarn.lock
-
-# Editor files
-*.swp
-.DS_Store
-
-# Logs
-npm-debug.log*
-
-# Cached files
-.cache/
-
-# Generated files
-coverage/
-
-# Ignore compiled typescript files
-*.tsbuildinfo
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/*.css.map
+frontend/*.js.map
+frontend/.env*
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/*.swp
+frontend/.DS_Store
+frontend/npm-debug.log*
+frontend/.cache/
+frontend/coverage/
+frontend/*.tsbuildinfo
