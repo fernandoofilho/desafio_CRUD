@@ -34,13 +34,16 @@ Após baixar e configurar o docker, você precisará inicializar a API e a base 
 
 5. Navegue até a pasta frontend
    ```bash
-    cd frontend ```
+    cd frontend
+    ```
 6. Instale as dependencias do react
    ```bash
-   npm install```
+   npm install
+   ```
 8. Execute o frontend em modo desenvolvimento
     ```bash
-   npm run start```
+   npm run start
+    ```
 10. No seu navegador, abra http://localhost:3000/
 
 Certifique-se de que as portas 3000, 5000 e 5432 não estejam em uso
