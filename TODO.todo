@@ -28,18 +28,18 @@ ENTREGÁVEIS:
             [X] API - login via backend 
             [X] API - salvar login via jwt para manter sessão 
             [X] frontend - botões: logar, registrar
-        [ ] integração back e frontend
-            [ ] API - Admin deve poder alterar o tipo de outros usuarios e de admins mais novos
-            [ ] API - usuario só pode alterar nome, sobrenome e senha
-            [ ] Front - Campo de confirmar senha 
-            [ ] Carregar uma pagina de perfil para o admin 
-            [ ] Ver mais dados na pagina do admin 
-            [ ] css pagina admin 
-            [ ] Deixar a pagina de usuario mais bonita 
+        [X] integração back e frontend
+            [X] API - Admin deve poder alterar o tipo de outros usuarios e de admins mais novos
+            [X] API - usuario só pode alterar nome, sobrenome e senha
+            [X] Front - Campo de confirmar senha 
+            [X] Carregar uma pagina de perfil para o admin 
+            [X] Ver mais dados na pagina do admin 
+            [X] css pagina admin 
+            [X] Deixar a pagina de usuario mais bonita 
 
-        [ ] Instruções para execução do backend e frontend da aplicação
+        [X] Instruções para execução do backend e frontend da aplicação
         [X] Repositório git aberto 
-        [ ] Documentação detalhada 
+        [X] Documentação detalhada 
     Desejável:
         [X] Containerização com docker 
         [X] Sistema de migration e seed no backend para criação de tabelas e usuario admin do sistema
