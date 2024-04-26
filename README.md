@@ -4,65 +4,34 @@ Este repositório contém um projeto que consiste em duas partes principais: o b
 
 ## Backend
 
-A parte backend foi desenvolvida utilizando Flask, um framework de desenvolvimento web em Python. Antes de executar o backend, é necessário instalar as dependências. Para isso, siga os passos abaixo:
+A parte backend foi desenvolvida utilizando Flask com postgresql.
+Para o frontend foi utilizado reactJS.
 
-1. Navegue até a pasta `backend`.
-2. Execute o comando `pip install -r requirements.txt` para instalar as dependências Python necessárias.
+# Para executar o projeto
 
-Após instalar as dependências, é necessário configurar o banco de dados PostgreSQL. Siga os passos abaixo para configurar o banco de dados:
+primeiramente instale e configure o docker desktop:
 
-1. Navegue até a pasta `database`.
-2. Execute o arquivo Docker para iniciar o banco de dados PostgreSQL, garantindo que as portas padrão do postgresql estejam abertas, utilize o comando:
-3. ```bash docker run --name database -e POSTGRES_PASSWORD=INDT@2024 -d postgres -p 5432:5432  ```
+[Download docker](https://www.docker.com/products/docker-desktop/)
 
-Depois de configurar o banco de dados, é necessário executar as migrações do Flask. Siga os passos abaixo:
+Após baixar e configurar o docker, você precisará inicializar a API e a base de dados
+1. Abra o docker desktop
+1. abra a pasta do projeto com o cmd ou bash e digite ```bash docker compose up -d````
+2. ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/5b2996f5-0c1d-49a3-8a25-bea0a82f522c)
+Aguarde até que fique assim
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/0cbeacf6-8eca-4a48-b657-ebc8d953917d)
+ No seu docker desktop, você encontrará os containers assim:
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/e732ac95-4b3f-440b-9a5f-a1cf19f49987)
 
-1. Execute o comando para inicializar as migrações Flask.
-   ```bash flask db init ```
-3. Execute o comando para aplicar e atualizar as migrações.
-  ```bash flask db migrate ```
-Com o backend configurado e o banco de dados pronto, você pode executar o servidor Flask. 
+4. Navegue até a pasta frontend ```bash cd frontend ```
+5. Instale as dependencias do react ```npm install```
+6. Execute o frontend em modo desenvolvimento ```npm run start```
+7. No seu navegador, abra http://localhost:3000/
 
-**Nota:** A execução do backend ainda não está configurada via Docker. Para iniciar o backend, execute um dos seguintes comandos:
-- `python app.py` ou
-- `flask run`
+Certifique-se de que as portas 3000, 5000 e 5432 não estejam em uso
 
-## Frontend
+## Notas de desenvolvimento
+não são aceitas contribuições neste momento, pois este repositório é apenas para um desafio.
 
-A parte frontend foi desenvolvida utilizando ReactJS. Antes de executar o frontend, é necessário instalar as dependências. Para isso, siga os passos abaixo:
-
-1. Navegue até a pasta `frontend`.
-2. Execute o comando `npm install` para instalar as dependências do frontend.
-
-Depois de instalar as dependências, você pode iniciar o servidor de desenvolvimento do ReactJS. 
-
-Para iniciar o frontend, execute o seguinte comando:
-
-```bash
-npm run start
-
-```
-
-Após executar o frontend e o backend, você poderá acessar o aplicativo em um navegador da web. Certifique-se de que o servidor backend esteja em execução antes de iniciar o frontend.
-
-Este projeto foi desenvolvido como parte de um desafio e não será mais mantido ou atualizado. Portanto, não são aceitas contribuições neste momento.
-
-
-Gráficos de usuários ativos e inativos separados por tipo 
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/c41c27e2-6aee-4af4-87d2-46a02f2a6419)
-
-página de adicionar ou remover usuários 
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/98ea74a0-ddc4-4157-8dab-aa6f0a8a0083)
-
-página de login
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/12ebf3c2-875f-4026-bfea-51d84c3a7ce9)
-
-
-página de cadastro
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/2178b149-9ed3-4b99-928c-c3bfc1e9ae55)
-
-Página do usuário padrão (sem acesso as funcionalidades de admin)
-![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f1414d6e-cf94-4e7d-97b2-5c43e587c394)
 
 
 A base de dados é composta pelas tabelas de User e User_history, todos os usuários criados serão armazenados em User, independente se forem apagados.
@@ -78,7 +47,46 @@ User history
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/921fa6b8-de20-430d-b6e0-724f457ffaad)
 
 
-As senhas são criptografadas e descriptografadas na API do backend, são armazenadas criptografadas no banco.
+Inicialmente, as senhas seriam criptografadas e descriptografadas na API do backend, e armazenadas criptografadas no banco, por questões de tempo, optei por remover essa função, pois estava atrasando os testes.
+
 
 Optei por não utilizar .env no back e no front por ser um projeto que não vai entrar em deploy de fato, então todas as rotas e secret_keys estão no código 
+
+
+Aqui, vou deixar como começou e a versão final: 
+
+## Gráficos de usuários ativos e inativos separados por tipo 
+### Versão Inicial
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/c41c27e2-6aee-4af4-87d2-46a02f2a6419)
+
+### Versão Final
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/d7a1ec4d-2ffc-46d6-920d-e4214feea707)
+
+
+### página de adicionar ou remover usuários 
+## Versão Inicial
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/98ea74a0-ddc4-4157-8dab-aa6f0a8a0083)
+## Versão Final
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/d1c4d734-1650-4d58-91dd-d6845c9c061f)
+
+## página de login
+## Versão Inicial
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/12ebf3c2-875f-4026-bfea-51d84c3a7ce9)
+## Versão Final
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/d026bbb8-8e81-46de-a900-049f4d63ae11)
+
+
+## página de cadastro
+## Versão Inicial
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/2178b149-9ed3-4b99-928c-c3bfc1e9ae55)
+## Versão Final
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/805ac348-2091-485d-8adc-56b6fc2d03e1)
+
+
+## Página do usuário padrão (sem acesso as funcionalidades de admin)
+
+### Versão Inicial
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f1414d6e-cf94-4e7d-97b2-5c43e587c394)
+### Versão Final
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f63c7d8e-5f0b-4dff-b943-46e0ad38a5f1)
 
