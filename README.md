@@ -15,17 +15,24 @@ primeiramente instale e configure o docker desktop:
 
 Após baixar e configurar o docker, você precisará inicializar a API e a base de dados
 1. Abra o docker desktop
-1. abra a pasta do projeto com o cmd ou bash e digite
+2. abra a pasta do projeto com o cmd ou bash e digite
 ```bash
  docker compose up -d
 ```
-3. ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/5b2996f5-0c1d-49a3-8a25-bea0a82f522c)
-Aguarde até que fique assim
+![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/5b2996f5-0c1d-49a3-8a25-bea0a82f522c) 
+
+
+
+3. Aguarde até que fique assim
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/0cbeacf6-8eca-4a48-b657-ebc8d953917d)
+
+
  No seu docker desktop, você encontrará os containers assim:
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/e732ac95-4b3f-440b-9a5f-a1cf19f49987)
 
-4. Navegue até a pasta frontend
+
+
+5. Navegue até a pasta frontend
    ```bash
     cd frontend ```
 6. Instale as dependencias do react
