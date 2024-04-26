@@ -2,12 +2,14 @@
 
 Este repositório contém um projeto que consiste em duas partes principais: o backend e o frontend.
 
-## Backend
+# Aplicação 
 
 A parte backend foi desenvolvida utilizando Flask com postgresql.
 Para o frontend foi utilizado reactJS.
+Foi feita a criaçao das tabelas e seed de dados iniciais através de scripts .sql, que podem ser encontrados em backend/database
 
-# Para executar o projeto
+
+## Para executar o projeto
 
 primeiramente instale e configure o docker desktop:
 
@@ -48,7 +50,20 @@ Após baixar e configurar o docker, você precisará inicializar a API e a base 
 
 Certifique-se de que as portas 3000, 5000 e 5432 não estejam em uso
 
-## Notas de desenvolvimento
+## Contas para testar
+
+Conta de admin: 
+email: admin@example.com
+senha: @ValidKey123
+
+Conta usuário normal 
+email: user2@example.com
+senha: @ValidKey123
+
+Todas as senhas geradas através do seed inicial são  @ValidKey123.
+A regra para criação de senha é conter um caracter especial e uma pelo menos uma letra maiúscula, a senha contém de 8 a 16 letras.
+
+# Notas de desenvolvimento
 não são aceitas contribuições neste momento, pois este repositório é apenas para um desafio.
 
 
@@ -108,4 +123,6 @@ Aqui, vou deixar como começou e a versão final:
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f1414d6e-cf94-4e7d-97b2-5c43e587c394)
 ### Versão Final
 ![image](https://github.com/fernandoofilho/desafio_CRUD/assets/54952942/f63c7d8e-5f0b-4dff-b943-46e0ad38a5f1)
+
+
 
