@@ -94,7 +94,7 @@ export default function Users() {
     }, []);
 
     return (
-        <div>
+        <div className='users-container'>
             <h1>Adicionar ou remover usuários </h1>
             <form>
                 <input type="email" placeholder="Email" value={newUser.userEmail} onChange={(e) => setNewUser({ ...newUser, userEmail: e.target.value })} />
@@ -114,8 +114,8 @@ export default function Users() {
                 {users.map(user => (
                     user.userEmail !== userEmail && (
                         <li key={user.userEmail} className='user-item'>
-                            <span className='user-name'>{user.userName} {user.userSurname}</span>
-                            <span className='user-email'>{user.userEmail}</span>
+                            <span className='user-name'>{user.userName}   {user.userSurname} </span>
+                            <span className='user-email'>  {user.userEmail} </span>
                             <button className='remove-button' onClick={() => removeUser(user.userEmail)}>Remover</button>
                         </li>    
                 )

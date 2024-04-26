@@ -1,5 +1,57 @@
-.test{
-    height: 100vh;
-    width: 100vh;
-    background-color: blue;
+
+.user-home-container {
+    top: 120px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index:100;
+    position: relative;
+    background-color: rgba(145, 145, 145, 0.731);    
+}
+.profile-buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: row;
+    justify-content: center;
+}
+.profile-button{
+    width: 150px;
+    margin-left:40px;
+    margin-right:40px;
+}
+.user-home-container h2 {
+    margin-bottom: 20px;
+}
+
+.user-home-container div {
+    margin-bottom: 15px;
+}
+
+.user-home-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user-home-container input[type="text"],
+.user-home-container input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.user-home-container button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-home-container button:hover {
+    background-color: #0056b3;
 }

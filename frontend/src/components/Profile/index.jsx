@@ -1,7 +1,6 @@
 import React, { useState, useEffect  } from 'react';
 import './index.css';
 import { useLogin } from '../../context/LoginContext';
-
 export default function Profile() {
     const { userEmail, userName,  userSurname,
             logout,
@@ -29,7 +28,6 @@ export default function Profile() {
             formData.append('userSurname', surname);
             formData.append('currentPassword', currentPassword);
     
-            // Verifique se o campo de senha está preenchido antes de realizar a verificação
             if (password.trim() !== '') {
                 const verifyResponse = await fetch('http://127.0.0.1:5000/verify/key', {
                     method: 'POST',
@@ -56,7 +54,6 @@ export default function Profile() {
                     setErrorMessage('Ocorreu um erro ao verificar a senha atual.');
                 }
             } else {
-                // Se o campo de senha não estiver preenchido, não faça a verificação
                 const updateResponse = await fetch('http://127.0.0.1:5000/update/user/', {
                     method: 'PATCH',
                     body: formData,
@@ -111,6 +108,7 @@ export default function Profile() {
     };
 
     return (
+        <> 
         <div className="user-home-container">
             <h2>User Profile</h2>
             <div>
@@ -141,17 +139,18 @@ export default function Profile() {
                     <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
                 )}
             </div>
-            <div>
+            <div className='profile-buttons-container'>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 {isEditing ? (
-                    <button onClick={handleSave}>Save</button>
+                    <button className='profile-button' onClick={handleSave}>Save</button>
                 ) : (
-                    <button onClick={handleEdit}>Edit</button>
+                    <button className='profile-button' onClick={handleEdit}>Edit</button>
                 )}
-                <button onClick={handleDeleteAccount}>Delete Account</button>
-                <button onClick={handleLogout}>Sair</button>
+                <button className='profile-button' onClick={handleDeleteAccount}>Delete Account</button>
+                <button className='profile-button' onClick={handleLogout}>Sair</button>
 
             </div>
         </div>
+        </>
     );
 }

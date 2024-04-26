@@ -29,3 +29,15 @@ services:
       DB_NAME: postgres
       DB_USER: postgres
       DB_PASSWORD: INDT@2024
+      
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      REACT_APP_API_URL: http://backend:5000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend

@@ -1,15 +1,27 @@
-/* index.css */
-.login-container {
+
+.logo{
+    bottom:280px;
     width: 300px;
+    position: relative;
+}
+.login-container {
+    position: absolute;
+    width: 300px; 
+    min-height: 280px;
+    max-height: 360px;
     margin: 100px auto;
     padding: 20px;
+    background-color: rgba(240, 248, 255, 0.5);
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
+    z-index: 1;
+    transition: height 0.3s ease; 
 }
 
 .login-container h2 {
     margin-bottom: 20px;
+    color:rgb(3, 0, 153);
 }
 
 .login-container form {
@@ -22,13 +34,24 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: rgba(240, 248, 255, 0.5);
+
 }
 
 .login-container button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color:rgba(0, 13, 251, 0.9);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.login-container button:hover {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color:rgba(0, 13, 254, 0.689);
     color: #fff;
     cursor: pointer;
 }
@@ -36,9 +59,11 @@
 .login-container p {
     margin-top: 10px;
     cursor: pointer;
-    color: #007bff;
+    color: rgba(0, 13, 251, 0.9);
+    transition: 0.3s ease;
+}
+.login-container p:hover{
+    color: rgba(85, 92, 225, 0.689);
+
 }
 
-.login-container p:hover {
-    text-decoration: underline;
-}

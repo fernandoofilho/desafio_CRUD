@@ -1,10 +1,13 @@
+combined-chart{
+  width: 800px;
+  height: 100px;
+}
 .graficos {
     display: flex;
-    justify-content: space-between; 
-  }
-
-  .admin,
-  .normal {
-    width: 600px;
-    height: 600px;
+    width: 1200px;
+    height: 500px;
+    position: absolute; 
+    padding: 40px;
+    background-color: rgba(209, 209, 209, 0.66);
+    margin-top:40px;
   }

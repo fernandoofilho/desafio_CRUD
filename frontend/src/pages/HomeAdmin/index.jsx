@@ -4,6 +4,8 @@ import SideBar from '../../components/SideBar';
 import Users from '../../components/Users';
 import Charts from '../../components/Charts';
 import Profile from '../../components/Profile';
+import ParticlesComponent from '../../components/GeneralBackground';
+
 import './index.css'; 
 
 export default function Home() {
@@ -33,7 +35,10 @@ export default function Home() {
   };
 
   return (
-    <>        
+    <>  
+
+      <div className="home-container">
+      <ParticlesComponent className='background' />
       <SideBar onTabClick={handleTabClick} />
       <div className='.container-home'>
         <div className='content'>
@@ -42,6 +47,8 @@ export default function Home() {
           {activeTab === 'users' && <Users fetchWithToken={fetchWithToken} />}
         </div>
       </div>
+      </div>      
+      
     </>
   );
 }

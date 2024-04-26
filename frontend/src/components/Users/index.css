@@ -1,7 +1,20 @@
+.users-container{
+    height: 500px;
+    z-index: 100;
+    position: absolute;
+    background-color:#999999bf;
+    border-radius:1%;
+    padding: 20px;
+    left:300px;
+    top:50px;
+    
+}
+
 .user-list {
-    max-height: 200px; 
-    width: 100vh;
+    max-height: 340px; 
+    width: 95%;
     overflow-y: auto; 
+
 }
 
 
@@ -18,13 +31,13 @@
 }
 
 .user-email {
-    color: #666;
+    color: #000000;
     margin-left:5px;
 
 }
 
 .remove-button {
-    margin-left:5px;
+    margin-left:10px;
     background-color: #f44336;
     color: white;
     border: none;
